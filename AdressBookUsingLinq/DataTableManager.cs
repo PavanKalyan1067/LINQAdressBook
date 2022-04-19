@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Linq;
 
 namespace LINQ_AddressBook
 {
@@ -13,7 +14,6 @@ namespace LINQ_AddressBook
         {
             custTable = new DataTable("AddressBookSystem");
             DataColumn dtColumn;
-
             // Create id column  
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(Int32);
@@ -24,7 +24,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = true;
             // Add column to the DataColumnCollection.  
             custTable.Columns.Add(dtColumn);
-
             // Create Name column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(String);
@@ -35,7 +34,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             /// Add column to the DataColumnCollection.  
             custTable.Columns.Add(dtColumn);
-
             // Create Name column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(String);
@@ -46,7 +44,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             /// Add column to the DataColumnCollection.  
             custTable.Columns.Add(dtColumn);
-
             // Create Name column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(String);
@@ -57,7 +54,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             /// Add column to the DataColumnCollection.  
             custTable.Columns.Add(dtColumn);
-
             // Create Name column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(String);
@@ -68,7 +64,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             /// Add column to the DataColumnCollection.  
             custTable.Columns.Add(dtColumn);
-
             // Create Name column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(String);
@@ -79,7 +74,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             /// Add column to the DataColumnCollection.  
             custTable.Columns.Add(dtColumn);
-
             // Create Address column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(String);
@@ -89,7 +83,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             // Add column to the DataColumnCollection.    
             custTable.Columns.Add(dtColumn);
-
             // Create Address column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(Int64);
@@ -99,7 +92,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             // Add column to the DataColumnCollection.    
             custTable.Columns.Add(dtColumn);
-
             // Create Address column.    
             dtColumn = new DataColumn();
             dtColumn.DataType = typeof(Int64);
@@ -109,7 +101,6 @@ namespace LINQ_AddressBook
             dtColumn.Unique = false;
             // Add column to the DataColumnCollection.    
             custTable.Columns.Add(dtColumn);
-
         }
         //Insert Values in Datatable
         public int AddValues()
@@ -142,7 +133,6 @@ namespace LINQ_AddressBook
 
             return custTable.Rows.Count;
         }
-
         //Insert values in Data Table
         public void InsertintoDataTable(ContactDataManager contactDataManager)
         {
@@ -158,9 +148,22 @@ namespace LINQ_AddressBook
             custTable.Rows.Add(dtRow);
 
         }
+        public int EditDataTable(string FirstName, string ColumnName)
+        {
+            AddValues();
+            var modifiedList = (from ContactList in custTable.AsEnumerable() where ContactList.Field<string>("FirstName") == FirstName select ContactList).FirstOrDefault();
+            if (modifiedList != null)
+            {
+                modifiedList[ColumnName] = "Sing";
+                Display();
+                return 1;
+            }
+            else return 0;
+        }
         //Display all Values in DataRow
         public void Display()
         {
+
             foreach (DataRow dtRows in custTable.Rows)
             {
                 Console.WriteLine("{0} \t {1} \t {2} \t {3} \t {4} \t {5} \t {6} \t {7}\n", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["Zip"], dtRows["PhoneNumber"], dtRows["Email"]);
