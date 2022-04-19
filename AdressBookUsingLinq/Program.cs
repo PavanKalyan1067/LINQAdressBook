@@ -50,6 +50,10 @@ namespace LINQ_AddressBook
             //count based on city or state
             string var4 = dataTableManger.RetrieveCountBasedOnCityorState();
             Console.WriteLine("Success" + varl);
+
+            //sort based on name in data table
+            string var5 = dataTableManger.SortBasedOnNameInDataTable("chennai");
+            Console.WriteLine("Success" + varl);
         }
     }
 }
