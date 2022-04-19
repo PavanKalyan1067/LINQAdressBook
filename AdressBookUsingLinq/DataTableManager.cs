@@ -118,6 +118,7 @@ namespace LINQ_AddressBook
             contactDataManager.City = "Hyd";
             contactDataManager.State = "TS";
             contactDataManager.zip = 500072;
+            contactDataManager.Type = "Friends";
             InsertintoDataTable(contactDataManager);
 
             //Insert Values into Table
@@ -129,6 +130,17 @@ namespace LINQ_AddressBook
             contactDataManagers.City = "Hyd";
             contactDataManagers.State = "TS";
             contactDataManagers.zip = 123001;
+            contactDataManager.Type = "Family";
+            InsertintoDataTable(contactDataManagers);
+            contactDataManagers.FirstName = "Raju";
+            contactDataManagers.LastName = "Yadav";
+            contactDataManagers.PhoneNumber = 7722205050;
+            contactDataManagers.Email = "raj@gmail.com";
+            contactDataManagers.Address = "Sasthri street,Hyd";
+            contactDataManagers.City = "Hyd";
+            contactDataManagers.State = "Ap";
+            contactDataManagers.zip = 321001;
+            contactDataManager.Type = "Fam";
             InsertintoDataTable(contactDataManagers);
 
             return custTable.Rows.Count;
